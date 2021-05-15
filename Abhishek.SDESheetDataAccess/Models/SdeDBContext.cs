@@ -39,8 +39,6 @@ namespace Abhishek.SDESheetDataAccess.Models
         {
             modelBuilder.Entity<Progress>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.Property(e => e.DateOfCompletion)
                     .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
