@@ -22,5 +22,26 @@ namespace Abhishek.SDESheetDataAccess
             return usersList;
         }
 
+        public bool ValidateLogin(string emailId, string password)
+        {
+            bool status = false;
+            try
+            {
+                var objUser = (from usr in context.Users
+                               where usr.EmailId == emailId && usr.UserPassword == password
+                               select usr.EmailId).SingleOrDefault();
+
+                if (objUser != null)
+                {
+                    status=true;
+                }
+            }
+            catch (Exception)
+            {
+                status = false;
+            }
+            return status;
+        }
+
     }
 }

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abhishek.SDESheetDataAccess;
 using Abhishek.SDESheetDataAccess.Models;
+using Abhishek.SDESheet.Services.Models;
 
 namespace Abhishek.SDESheet.Services.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class QuestionsController : Controller
     {
@@ -33,6 +34,22 @@ namespace Abhishek.SDESheet.Services.Controllers
                 users = null;
             }
             return Json(users);
+        }
+
+        [HttpPost]
+        public JsonResult ValidateUserCredentials(Models.User userObj)
+        {
+            bool status = false;
+            try
+            {
+                status = repository.ValidateLogin(userObj.EmailId, userObj.UserPassword);
+                
+            }
+            catch (Exception)
+            {
+                status=false;
+            }
+            return Json(status);
         }
 
     }
