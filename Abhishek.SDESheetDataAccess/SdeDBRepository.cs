@@ -22,6 +22,13 @@ namespace Abhishek.SDESheetDataAccess
             return usersList;
         }
 
+        public List<Questions> GetAllQuestions()
+        {
+            var quesList = context.Questions.ToList();
+
+            return quesList;
+        }
+
         public bool ValidateLogin(string emailId, string password)
         {
             bool status = false;

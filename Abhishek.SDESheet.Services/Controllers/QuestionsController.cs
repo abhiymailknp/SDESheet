@@ -21,6 +21,23 @@ namespace Abhishek.SDESheet.Services.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetAllQuestions()
+        {
+            List<Questions> questions = new List<Questions>();
+            try
+            {
+                questions = repository.GetAllQuestions();
+            }
+            catch (Exception)
+            {
+                questions = null;
+            }
+            return Json(questions);
+        }
+
+
+
+        [HttpGet]
         public JsonResult GetAllUsers()
         {
             List<Users> users = 

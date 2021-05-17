@@ -71,6 +71,10 @@ namespace Abhishek.SDESheetDataAccess.Models
                     .HasMaxLength(2048)
                     .IsUnicode(false);
 
+                entity.Property(e => e.QuestionName)
+                    .HasMaxLength(2048)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.VideoLink)
                     .HasMaxLength(2048)
                     .IsUnicode(false);
@@ -83,6 +87,14 @@ namespace Abhishek.SDESheetDataAccess.Models
 
                 entity.Property(e => e.EmailId)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserPassword)

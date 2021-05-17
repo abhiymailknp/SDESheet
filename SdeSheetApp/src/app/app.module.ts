@@ -7,11 +7,17 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './Sde-Services/user-service/user.service';
 import { routing } from './app.routing';
+import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
     CommonLayoutComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    UserLayoutComponent,
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, routing
