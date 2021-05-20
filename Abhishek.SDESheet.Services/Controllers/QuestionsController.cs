@@ -69,5 +69,22 @@ namespace Abhishek.SDESheet.Services.Controllers
             return Json(status);
         }
 
+        [HttpPost]
+        public JsonResult UpdateQuestionProgress(Models.Progress progressObj)
+        {
+            bool status = false;
+            try
+            {
+                status = repository.UpdateProgress(progressObj.QuesId, progressObj.EmailId, progressObj.Status, progressObj.DateOfCompletion);
+            }
+            catch (Exception)
+            {
+
+                status = false;
+            }
+
+            return Json(status);
+        }
+
     }
 }

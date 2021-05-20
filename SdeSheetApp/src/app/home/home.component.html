@@ -18,22 +18,27 @@
           <th style="text-align:center;">Question</th>
           <th style="text-align:center;">Video Link</th>
           <th style="text-align:center;">GFG Link</th>
-          <!--  <th style="text-align:center;">Quantity Available</th>
-    <th style="text-align:center;">Action</th> -->
+          <th style="text-align:center;" *ngIf="userLayout">Status</th>
+          <!--<th style="text-align:center;" *ngIf="userLayout">Date of Completion</th>-->
         </tr>
-        <tr *ngFor="let question of questions" style="background-color:white">
+        <tr *ngFor="let question of questions" style="background-color:white;">
           <td> {{question.quesId }} </td>
           <td>{{question.questionName}}</td>
           <td>
-            <a class="navbar-brand brand-image" href={{question.videoLink}}>
+            <a class="navbar-brand brand-image" href={{question.videoLink}} target="_blank">
               <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-youtube-logo-icon-png-image_3560543.jpg" alt="" width="80" height="80">
             </a>
           </td>
           <td>
-            <a class="navbar-brand brand-image" href={{question.quesLink}}>
+            <a class="navbar-brand brand-image" href={{question.quesLink}} target="_blank">
               <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" alt="" width="80" height="80">
             </a>
           </td>
+            
+          <td *ngIf="userLayout">
+            <input type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" value="checked" />
+          </td>
+
 
         </tr>
       </table>

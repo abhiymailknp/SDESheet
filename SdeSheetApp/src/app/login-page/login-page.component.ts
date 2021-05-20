@@ -24,7 +24,9 @@ export class LoginPageComponent implements OnInit {
         console.log(this.status);
         this.showDiv = true;
         if (this.status) {
-          sessionStorage.setItem('userName', "true");
+          sessionStorage.setItem('userName', form.value.email);
+          sessionStorage.setItem('loginStatus', 'true');
+
           this.router.navigate(['/home']);
         }
         else {

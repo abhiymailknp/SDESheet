@@ -10,6 +10,7 @@ import { QuesService } from '../Sde-Services/ques-service/ques.service';
 })
 export class HomeComponent implements OnInit {
   userName: string;
+  loginStatus: string;
   userLayout: boolean = false;
   commonLayout: boolean = false;
   questions: IQuestion[];
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private _questionService: QuesService)
   {
     this.userName = sessionStorage.getItem('userName');
-    if (this.userName == "true") {
+    this.loginStatus = sessionStorage.getItem('loginStatus');
+    if (this.loginStatus == "true") {
       this.userLayout = true;
     }
     else {
@@ -29,10 +31,15 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     this.getQuestions();
+    if (!this.userLayout) {
+      this.getQuestions();
+    }
+    
         
     }
 
-  getQuestions() {
+  getQuestions()
+  {
     this._questionService.getQuestions().subscribe(
       responseQuestionData => {
         this.questions = responseQuestionData;
@@ -44,6 +51,28 @@ export class HomeComponent implements OnInit {
         console.log(this.errMsg);
       }
     );
+
+  }
+
+  getProgress()
+  {
+    this._questionService.getQuestions().subscribe(
+      responseQuestionData => {
+        this.questions = responseQuestionData;
+        console.log(this.questions);
+      },
+      responseProductError => {
+        this.questions = null;
+        this.errMsg = responseProductError;
+        console.log(this.errMsg);
+      }
+    );
+
+  }
+
+  updateProgress(id: number, ischecked: Boolean) {
+    console.log(id);
+    console.log(ischecked);
 
   }
 
