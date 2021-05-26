@@ -6,37 +6,44 @@
 </div>
 
 
+  
 <div class="myContent">
   <div style="text-align:center;">
-    <h1>SDE Question Sheet</h1>
+    <h1 style="padding-top:30px;color:lightcoral">SDE Question Sheet</h1>
     <br />
     <br />
-    <div class="table-responsive">
-      <table class="table" style="border:5px solid rgba(220,230,242,1);">
-        <tr style="background-color:rgba(220,230,242,1); font-size:12pt">
-          <th style="text-align:center;">Ques No.</th>
+    <div class="table-responsive" style="    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    " >
+      <table class="table" style="  background-color: #3c3c3d;color: white">
+        <tr id="header-row" style=" font-size:16pt; ">
+          <th style="text-align:center;max-width:80px">Ques No.</th>
           <th style="text-align:center;">Question</th>
           <th style="text-align:center;">Video Link</th>
           <th style="text-align:center;">GFG Link</th>
           <th style="text-align:center;" *ngIf="userLayout">Status</th>
           <!--<th style="text-align:center;" *ngIf="userLayout">Date of Completion</th>-->
         </tr>
-        <tr *ngFor="let question of questions" style="background-color:white;">
-          <td> {{question.quesId }} </td>
-          <td>{{question.questionName}}</td>
-          <td>
+        <tr *ngFor="let question of questions;let i = index" >
+          <td class="ques-class"> {{question.quesId }} </td>
+          <td >{{question.questionName}}</td>
+          <td style="text-align:center;padding-right:inherit">
             <a class="navbar-brand brand-image" href={{question.videoLink}} target="_blank">
-              <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-youtube-logo-icon-png-image_3560543.jpg" alt="" width="80" height="80">
+              <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-youtube-logo-icon-png-image_3560543.jpg" alt="" width="50" height="50">
             </a>
           </td>
-          <td>
+          <td style="text-align:center;padding-right:inherit;align-content:center">
             <a class="navbar-brand brand-image" href={{question.quesLink}} target="_blank">
-              <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" alt="" width="80" height="80">
+              <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" alt="" width="50" height="50">
             </a>
           </td>
-            
+
           <td *ngIf="userLayout">
-            <input type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" value="checked" />
+            <input *ngIf="progressArray[i]" type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" checked />
+
+            <input *ngIf="!progressArray[i]" type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" />
+
           </td>
 
 
