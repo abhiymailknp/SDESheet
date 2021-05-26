@@ -23,7 +23,6 @@ namespace Abhishek.SDESheet.Services.Controllers
         [HttpGet]
         public JsonResult GetAllQuestions()
         {
-
             List<Questions> questions = new List<Questions>();
             try
             {
@@ -52,33 +51,6 @@ namespace Abhishek.SDESheet.Services.Controllers
                 users = null;
             }
             return Json(users);
-        }
-
-
-        [HttpPost]
-        public JsonResult AddUser(Abhishek.SDESheetDataAccess.Models.Users user)
-        {
-            bool check;
-            string message;
-            try
-            {
-                check = repository.CheckUser(user.EmailId);
-                if (check)
-                {
-                    message = "User Exists";
-                }
-                else
-                {
-                    repository.registerUser(user);
-                    message = "User Registered Succesfully";
-                }
-                
-            }
-            catch (Exception)
-            {
-                message = "Some Error Occured";
-            }
-            return Json(message);
         }
 
         [HttpPost]
@@ -112,21 +84,6 @@ namespace Abhishek.SDESheet.Services.Controllers
             }
 
             return Json(status);
-        }
-
-        [HttpGet]
-        public JsonResult GetUserProgress(string emailId)
-        {
-            List<SDESheetDataAccess.Models.Progress> progress = new List<SDESheetDataAccess.Models.Progress>();
-            try
-            {
-                progress = repository.getUserProgress(emailId);
-            }
-            catch (Exception)
-            {
-                progress = null;
-            }
-            return Json(progress);
         }
 
     }
