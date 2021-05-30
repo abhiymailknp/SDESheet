@@ -1,6 +1,6 @@
 export interface INewUser {
   firstName: string,
-  lastName : string ,
+  lastName: string,
   emailId: string,
   userPassword: string,
 }

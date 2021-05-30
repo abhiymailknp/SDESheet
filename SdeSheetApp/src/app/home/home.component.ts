@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit {
   progress: IProgress[];
   errMsg: any;
   progressArray = new Array<number>(10).fill(0)
+
   constructor(private router: Router, private _questionService: QuesService)
   {
     this.userName = sessionStorage.getItem('userName');
-    
     if (this.userName) {
       this.userLayout = true;
     }
@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
       this.getProgress();
     }
     console.log(this.progressArray);
-        
     }
 
   getQuestions()
@@ -62,9 +61,8 @@ export class HomeComponent implements OnInit {
       responseProgressData => {
         this.progress = responseProgressData;
         console.log(this.progress);
-        for (var i = 0; i < this.progress.length; i++)
-        {
-          this.progressArray[this.progress[i].quesId-1] = this.progress[i].status;
+        for (var i = 0; i < this.progress.length; i++) {
+          this.progressArray[this.progress[i].quesId - 1] = this.progress[i].status;
         }
         console.log(this.progressArray);
       },
@@ -78,7 +76,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateProgress(id: number, ischecked: Boolean) {
-    let date: Date = new Date();  
+    let date: Date = new Date();
     console.log(id);
     console.log(ischecked);
     if (ischecked == true)
@@ -97,7 +95,6 @@ export class HomeComponent implements OnInit {
         console.log(this.errMsg);
       }
     )
-
   }
 
 }

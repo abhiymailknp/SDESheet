@@ -72,7 +72,7 @@ namespace Abhishek.SDESheet.Services.Controllers
                     repository.registerUser(user);
                     message = "User Registered Succesfully";
                 }
-                
+
             }
             catch (Exception)
             {
@@ -128,6 +128,7 @@ namespace Abhishek.SDESheet.Services.Controllers
             }
             return Json(progress);
         }
+
 
     }
 }

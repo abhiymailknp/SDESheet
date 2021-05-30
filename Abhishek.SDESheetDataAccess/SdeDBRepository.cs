@@ -21,6 +21,48 @@ namespace Abhishek.SDESheetDataAccess
 
             return usersList;
         }
+        public bool CheckUser(string emailId)
+        {
+            bool status = false;
+            try
+            {
+                var user = context.Users.Find(emailId);
+                if (user != null)
+                {
+                    status = true;
+                }
+                else
+                    status = false;
+            }
+            catch (Exception)
+            {
+                status = false;
+            }
+            return status;
+        }
+        public List<Progress> getUserProgress(string emailId)
+        {
+            var progressList = context.Progress.Where(p => p.EmailId == emailId)
+                                               .OrderBy(p => p.QuesId)
+                                               .ToList();
+            return progressList;
+        }
+
+        public bool registerUser(Users user)
+        {
+            bool status = false;
+            try
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+                status = true;
+            }
+            catch (Exception)
+            {
+                status = false;
+            }
+            return status;
+        }
         private bool CheckEntry(int qid, string emailid)
         {
             bool entry = false;
@@ -70,42 +112,7 @@ namespace Abhishek.SDESheetDataAccess
             return status;
         }
 
-        public bool CheckUser(string emailId)
-        {
-            bool status = false;
-            try
-            {
-                var user = context.Users.Find(emailId);
-                if (user != null)
-                {
-                    status = true;
-                }
-                else
-                    status = false;
-            }
-            catch (Exception)
-            {
 
-                status = false;
-            }
-            return status;
-        }
-
-        public bool registerUser(Users user)
-        {
-            bool status = false;
-            try
-            {
-                context.Users.Add(user);
-                context.SaveChanges();
-                status = true;
-            }
-            catch (Exception)
-            {
-                status = false;
-            }
-            return status;
-        }
 
         public bool UpdateProgress(int qId,string emailId,byte quesStatus,DateTime dateOfCompletion)
         {
@@ -151,13 +158,7 @@ namespace Abhishek.SDESheetDataAccess
             return status;
         }
 
-        public List<Progress> getUserProgress(string emailId)
-        {
-            var progressList = context.Progress.Where(p => p.EmailId == emailId)
-                                               .OrderBy(p => p.QuesId)
-                                               .ToList();
-            return progressList;
-        }
+      
 
     }
 }
