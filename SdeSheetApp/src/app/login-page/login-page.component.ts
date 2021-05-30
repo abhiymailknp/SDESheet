@@ -14,8 +14,17 @@ export class LoginPageComponent implements OnInit {
   errorMsg: string;
   msg: string;
   showDiv: boolean = false;
+  userName: string;
 
-  constructor(private _userService: UserService, private router: Router) { }
+  constructor(private _userService: UserService, private router: Router) {
+    this.userName = sessionStorage.getItem('userName');
+
+    if (this.userName) {
+      this.router.navigate(['/home']);
+    }
+
+
+  }
 
   submitLoginForm(form: NgForm) {
     this._userService.validateCredentials(form.value.email, form.value.password).subscribe(
@@ -25,7 +34,6 @@ export class LoginPageComponent implements OnInit {
         this.showDiv = true;
         if (this.status) {
           sessionStorage.setItem('userName', form.value.email);
-          sessionStorage.setItem('loginStatus', 'true');
 
           this.router.navigate(['/home']);
         }
