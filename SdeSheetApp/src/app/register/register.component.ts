@@ -10,8 +10,8 @@ import { UserService } from '../Sde-Services/user-service/user.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   msg: string = '';
-  errMsg: string;
-  status = false;
+  errorMsg: string;
+  status :string;
   emailId: string;
   constructor(private formBuilder: FormBuilder, private _userService: UserService, private router: Router) { }
   ngOnInit(): void {
@@ -20,5 +20,18 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     });
   }
-  SubmitForm(form: FormGroup) { }
+  SubmitForm(form: FormGroup) {
+    this._userService.registerUser(form.value.firstName, form.value.lastName, form.value.emailId, form.value.password).subscribe(
+      responseRegisterStatus => {
+        this.status = responseRegisterStatus;
+        alert(this.status);
+        this.router.navigate(['/home']);
+        
+      },
+      responseRegisterError => {
+        this.errorMsg = responseRegisterError;
+      },
+      () => console.log("SubmitLoginForm method executed successfully")
+    );
+  }
 }

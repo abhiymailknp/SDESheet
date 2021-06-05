@@ -8,11 +8,11 @@
 
 <div class="myContent">
   <div style="text-align:center;">
-    <h1 style="padding-top:30px;color:lightcoral">SDE Question Sheet</h1>
+    <h1 style="padding-top:0px;color:#0a8bd7">SDE Question Sheet</h1>
     <br />
     <br />
     <div class="table-responsive" style="width: 70%;margin-left: auto;margin-right: auto;">
-      <table class="table" style="  background-color: #3c3c3d;color: white">
+      <table class="table" style="  background-color: black;color: white">
         <tr id="header-row" style=" font-size:16pt; ">
           <th style="text-align:center;max-width:80px">Ques No.</th>
           <th style="text-align:center;">Question</th>
@@ -21,7 +21,7 @@
           <th style="text-align:center;" *ngIf="userLayout">Status</th>
           <!--<th style="text-align:center;" *ngIf="userLayout">Date of Completion</th>-->
         </tr>
-        <tr *ngFor="let question of questions;let i = index" style="background-color:white;">
+        <tr *ngFor="let question of questions;let i = index" style="background-color:transparent;">
           <td class="ques-class"> {{question.quesId }} </td>
           <td>{{question.questionName}}</td>
           <td style="text-align:center;padding-right:inherit">
@@ -35,7 +35,7 @@
             </a>
           </td>
 
-          <td *ngIf="userLayout">
+          <td *ngIf="userLayout" id="status_checkbox" >
             <input *ngIf="progressArray[i]" type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" checked />
             <input *ngIf="!progressArray[i]" type="checkbox" style="width:25px;height:25px;text-align:center;vertical-align:middle" (click)="updateProgress(question.quesId,$event.target.checked)" />
           </td>

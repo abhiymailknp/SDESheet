@@ -1,30 +1,97 @@
-<nav class="navbar fixed navbar-expand-lg navbar-dark bg-dark " style="background-color:black">
+<nav class="navbar fixed navbar-expand-lg  " style="background:black">
 
-  <div class="container">
+  <div class="container" style="background:black">
     <a class="navbar-brand brand-image" href="#">
       <img src="http://www.sd-editions.com/aelfric/images/transimage3.png" alt="" width="120" height="50">
     </a>
   </div>
 
-  <div class="container-fluid">
-    <span class="navbar-text" style="padding-left:115px;font-size:24px;color:white">
-      SDE Interview Questions
-    </span>
-  </div>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarTogglerDemo02">
     <ul class="navbar-nav ms-auto ms-auto mb-2 mb-lg-0" style="padding-right:20px;">
       <li class="nav-item" style="padding-right:45px;font-size:20px">
-        <a routerLink="/login" class="nav-link" href="#">Login</a>
+        <button style="width:100px" type="button" (click)="show()" class="nav-link" href="#">Login</button>
       </li>
-      <li class="nav-item" style="padding-right: 45px; font-size: 20px">
-        <a class="nav-link" routerLink="/register">Sign Up</a>
-      </li>
+
     </ul>
   </div>
 </nav>
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div style="margin:50px auto;width:768px">
+    <div class="modal-content" style=" background:none;border:none">
+
+      <div class="modal-body">
+        <div class="container_login" id="container_login">
+          <div class="form-container sign-up-container">
+            <form [formGroup]="registerForm" (ngSubmit)="SubmitRegisterForm(registerForm)">
+              <h1>Create Account</h1>
+              <input type="text" placeholder="First Name" formControlName="firstName">
+              <p *ngIf="registerForm.controls.firstName.errors?.required &&  registerForm.controls.firstName.touched" class="error">This field is required!</p>
+              <p *ngIf="registerForm.controls.firstName.errors?.maxlength  &&  registerForm.controls.firstName.touched" class="error">
+                 Max 16 characters
+              </p>
+              <input type="text" placeholder="Last Name" formControlName="lastName">
+              <p *ngIf="registerForm.controls.lastName.errors?.maxlength  &&  registerForm.controls.lastName.touched" class="error">
+                Max 16 characters
+              </p>
+              <p *ngIf="registerForm.controls.lastName.errors?.required &&  registerForm.controls.lastName.touched" class="error">This field is required!</p>
+              <input type="text" placeholder="Email" formControlName="emailId">
+              <p *ngIf="registerForm.controls.emailId.errors?.required &&  registerForm.controls.emailId.touched" class="error">This field is required!</p>
+              <p *ngIf="registerForm.controls.emailId.errors?.pattern &&  registerForm.controls.emailId.touched" class="error">The EmailId is not proper!</p>
+              <input type="password" placeholder="Password" formControlName="password">
+              <p *ngIf="registerForm.controls.password.errors?.required &&  registerForm.controls.password.touched" class="error">This field is required!</p>
+              <button type="submit" [disabled]="registerForm.invalid" style="margin-top:14px;">Sign Up</button>
+            </form>
+          </div>
+          <div class="form-container sign-in-container">
+            <form #loginForm="ngForm" (ngSubmit)="submitLoginForm(loginForm)">
+              <h1>Sign in</h1>
+              <span>Use your account</span>
+              <input type="email" placeholder="Email" name="email" #emailRef="ngModel" ngModel required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+              <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+                <div [hidden]="!emailRef.errors.required">
+                  <p class="error">&nbsp;Email id is mandatory</p>
+                </div>
+                <div [hidden]="!emailRef.errors.pattern">
+                  <p class="error">&nbsp;Email id is not entered in proper format</p>
+                </div>
+              </div>
+              <input type="password" placeholder="Password" name="password" #passwordRef="ngModel" ngModel required>
+              <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+                <div [hidden]="!passwordRef.errors.required">
+                  <p class="error">&nbsp;Password is mandatory</p>
+                </div>
+              </div>
+
+              <button type="submit" [disabled]="!loginForm.form.valid" style="margin-top:14px;">Login</button>
+            </form>
+          </div>
+          <div class="overlay-container">
+            <div class="overlay">
+              <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+              </div>
+              <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="border:none">
+        <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
