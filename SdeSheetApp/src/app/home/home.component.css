@@ -18,11 +18,13 @@ td, th {
 th {
   background: #0a8bd7;
   color: black;
+  padding-right:5px;
 }
 
 td:hover {
   background-color: #0a8bd7;
   color: black;
+  font-weight:600;
 }
 
 img {

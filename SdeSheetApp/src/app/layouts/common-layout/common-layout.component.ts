@@ -66,6 +66,7 @@ export class CommonLayoutComponent implements OnInit {
           this.router.navigate(['/home']);
         }
         else {
+          alert("Invalid Credentials");
           this.msg = "Try again with valid credentials.";
         }
       },

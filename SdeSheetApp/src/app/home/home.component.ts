@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   questions: IQuestion[];
   progress: IProgress[];
   errMsg: any;
-  progressArray = new Array<number>(10).fill(0)
+  progressArray = new Array<number>(180).fill(0)
 
   constructor(private router: Router, private _questionService: QuesService)
   {
@@ -28,15 +28,15 @@ export class HomeComponent implements OnInit {
     else {
       this.commonLayout = true;
     }
-    console.log(this.userLayout);
-    console.log(this.commonLayout);
+   // console.log(this.userLayout);
+    //console.log(this.commonLayout);
   }
   ngOnInit() {
     this.getQuestions();
     if (this.userLayout) {
       this.getProgress();
     }
-    console.log(this.progressArray);
+    //console.log(this.progressArray);
     }
 
   getQuestions()
@@ -44,12 +44,12 @@ export class HomeComponent implements OnInit {
     this._questionService.getQuestions().subscribe(
       responseQuestionData => {
         this.questions = responseQuestionData;
-        console.log(this.questions);
+        //console.log(this.questions);
       },
       responseProductError => {
         this.questions = null;
         this.errMsg = responseProductError;
-        console.log(this.errMsg);
+        //console.log(this.errMsg);
       }
     );
 
@@ -60,16 +60,16 @@ export class HomeComponent implements OnInit {
     this._questionService.getProgress(this.userName).subscribe(
       responseProgressData => {
         this.progress = responseProgressData;
-        console.log(this.progress);
+        //console.log(this.progress);
         for (var i = 0; i < this.progress.length; i++) {
           this.progressArray[this.progress[i].quesId - 1] = this.progress[i].status;
         }
-        console.log(this.progressArray);
+        //console.log(this.progressArray);
       },
       responseProgressError => {
         this.progress = null;
         this.errMsg = responseProgressError;
-        console.log(this.errMsg);
+        //console.log(this.errMsg);
       }
     );
 
@@ -77,22 +77,22 @@ export class HomeComponent implements OnInit {
 
   updateProgress(id: number, ischecked: Boolean) {
     let date: Date = new Date();
-    console.log(id);
-    console.log(ischecked);
+    //console.log(id);
+    //console.log(ischecked);
     if (ischecked == true)
       this.quesStatus = 1;
     else
       this.quesStatus = 0;
     this._questionService.updateProgress(this.userName, id, this.quesStatus, date).subscribe(
       responseUpdateProgress => {
-        if (responseUpdateProgress)
-          console.log("Progress Updated Succesfully");
-        else
-          console.log("Progress not updtaed");
+      //  if (responseUpdateProgress)
+      //    console.log("Progress Updated Succesfully");
+      //  else
+      //    console.log("Progress not updtaed");
       },
       responseUpdateProgressError => {
         this.errMsg = responseUpdateProgressError;
-        console.log(this.errMsg);
+        //console.log(this.errMsg);
       }
     )
   }
